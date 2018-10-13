@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
      */
     protected Button send;
 
-    public Map<String, String> questions = mapQuestion();
+    public Map<String, String> questions = mapQuestion(); //Вынес ответы, чтоб делалась карта 1 раз, а не при каждом нажатии на кнопку
 
     /**
      * Метод, который вызывается при создании Activity
