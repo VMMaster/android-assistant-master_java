@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
      */
     protected Button send;
 
+    public Map<String, String> questions = mapQuestion();
+
     /**
      * Метод, который вызывается при создании Activity
      * @param savedInstanceState
@@ -50,24 +52,23 @@ public class MainActivity extends AppCompatActivity {
         chat = (TextView) findViewById(R.id.chat);
         message = (EditText) findViewById(R.id.message);
         send = (Button) findViewById(R.id.send);
-
         /**
          * Назначим обработчик события "Клик" на кнопке "отправить"
          */
+
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String question = message.getText().toString(); // Получим текст вопроса
                 message.setText(""); // Очистим поле
                 chat.append("\n<< " + question); // Отобразим вопрос в чате
-                String answer = answerQuestion(question); // Вычислим тексто ответа
+                String answer = answerQuestion(question, questions); // Вычислим тексто ответа
                 chat.append("\n>> " + answer); // Отобразим ответ в чате
             }
         });
     }
 
-    protected String answerQuestion(String question) {
-        question = question.toLowerCase(); // Привидем текст к нижнему регистру
+    protected Map<String, String> mapQuestion(){
         Map<String, String> questions = new HashMap<String, String>(){{ // Заполним "карту ответов"
             put("как дела", "Шикарно");
             put("чем занимаешься", "Отвечаю на дурацкие вопросы");
@@ -76,6 +77,11 @@ public class MainActivity extends AppCompatActivity {
             put("кек", "чебурек");
             put("в чем смысл жизни", "Научиться чему то новому");
         }};
+        return questions;
+    }
+
+    protected String answerQuestion(String question, Map<String, String> questions) {
+        question = question.toLowerCase(); // Привидем текст к нижнему регистру
 
         List<String> result = new ArrayList<>(); // В этом списке будем хранить ответы
 
